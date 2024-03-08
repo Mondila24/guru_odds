@@ -1,6 +1,6 @@
 # [algosports](https://www.algosports.bet)
 
-algosports.bet is a full-stack sports betting website heavily influenced by Fanduel. It offers odds pulled from [AussSportsBetting](https://www.aussportsbetting.com/data/historical-nfl-results-and-odds-data/) and predictions for sports enthusiasts. This project was an intensive three-week effort, where we delved into new technologies to create a platform for sports betting enthusiasts.
+algosports.bet is a full-stack sports betting website heavily influenced by Fanduel. It offers odds pulled from [AussSportsBetting](https://www.aussportsbetting.com/data/historical-nfl-results-and-odds-data/) and predictions for sports enthusiasts. This project was an intensive effort, where we delved into new technologies to create a platform for sports betting enthusiasts.
 
 The platform leverages machine learning models built using scikit-learn that analyze player data to assign the "best bet" for each game. Currently we only have NFL and NBA games, but are planning on adding in more game types.
 
