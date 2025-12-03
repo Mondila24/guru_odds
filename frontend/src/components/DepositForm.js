@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/DepositForm.css';
 // Axios
-import axios from "axios";
+import api from "../util/apiClient";
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -35,34 +35,24 @@ const DepositForm = ({ onClose, currentBalance }) => {
       return;
     }
 
-    // Calculate the expected balance by adding the deposit amount to the current balance
-    const expectedBalance = Number(currentBalance) + deposit;
-
-    // You can perform further actions here, such as updating the balance in a database or state
-    // For this example, we'll just log the expected balance
-    // console.log(`Expected Balance after deposit: ${expectedBalance}`);
-    axios({
-        method: "PATCH",
-        url:"https://sb-backend-6409fb97857a.herokuapp.com/api/account",
+    api({
+        method: "POST",
+        url:"/api/payments/initiate",
         headers: {
             Authorization: 'Bearer ' + authToken,
           },
         data:{
-          current_balance: expectedBalance.toFixed(2),
+          amount: deposit
          }
       })
       .then((response) => {
-        if (response.status === 200) {
-            // console.log("balance changed")
-            onClose()
-            balance = dispatch(initializeBalance(expectedBalance.toFixed(2)))
-            
+        const url = response.data.data?.authorization_url || response.data.authorization_url
+        if (url) {
+          window.open(url, '_blank')
         }
+        onClose()
       }).catch((error) => {
         if (error.response) {
-          // console.log(error.response)
-          // console.log(error.response.status)
-          // console.log(error.response.headers)
           }
       })
   };

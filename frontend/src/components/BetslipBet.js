@@ -20,7 +20,7 @@ import "../css/BetslipBet.css"
 import { ThemeProvider } from "../context/betslipTheme";
 
 // Axios
-import axios from 'axios';
+import api from '../util/apiClient';
 
 const BetslipContainer = styled(Grid)({
   display: 'flex',
@@ -245,9 +245,9 @@ const BetslipBet = ({bet}) => {
         console.log(formattedBet);      
 
         // Send the bet to the backend.
-        axios({
+        api({
           method: "POST",
-          url:"https://sb-backend-6409fb97857a.herokuapp.com/api/bets",
+          url:"/api/bets",
           headers: {
             Authorization: 'Bearer ' + authToken
           },

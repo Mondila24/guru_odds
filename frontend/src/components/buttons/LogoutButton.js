@@ -12,16 +12,16 @@ import { removeToken, setLoggedIn } from '../../slices/authSlice'
 import { Box, Button } from '@mui/material';
 
 // Axios
-import axios from "axios";
+import api from "../../util/apiClient";
 
 const LogoutButton = ( { onLogout } ) => {
 const dispatch = useDispatch();
   let navigate = useNavigate();
 
   function logMeOut() {
-    axios({
+    api({
       method: "POST",
-      url:"https://sb-backend-6409fb97857a.herokuapp.com/api/logout",
+      url:"/api/logout",
     })
     .then((response) => {
         dispatch(removeToken())

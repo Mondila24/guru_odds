@@ -6,7 +6,7 @@ import GameDetails from '../components/GameDetails'
 import LoadingIndicator from '../util/LoadingIndicator';
 
 // axios
-import axios from 'axios'
+import api from '../util/apiClient'
 import GameOddsHeader from '../components/GameOddsHeader'
 
 // CSS
@@ -22,9 +22,9 @@ const Home = () => {
     useEffect(() => {
         document.title = "Algo | ML Sports Betting"
 
-              axios({
+              api({
                 method: "GET",
-                url: "https://sb-backend-6409fb97857a.herokuapp.com/api/home",
+                url: "/api/home",
               })
               .then((response) => {
                 const res = response.data;

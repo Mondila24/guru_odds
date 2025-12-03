@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import axios from 'axios';
+import api from '../util/apiClient';
 
 const formalizeBetType = (bet_type) => {
     switch (bet_type) {
@@ -94,7 +94,7 @@ export const submitBets = () => (dispatch, getState) => {
     const promiseBets = bets.map(bet => {
         const requestData = {
             method: "POST",
-            url:"https://sb-backend-6409fb97857a.herokuapp.com/api/bets",
+            url:"/api/bets",
             headers: {
               Authorization: 'Bearer ' + authToken
             },
@@ -110,7 +110,7 @@ export const submitBets = () => (dispatch, getState) => {
             }
         };
 
-        return axios(requestData).catch(error => {
+        return api(requestData).catch(error => {
             if (error.response) {
                 if (error.response.status === 400) {
                     if (error.response.data.error === "Insufficient funds for wager") {

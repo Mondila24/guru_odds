@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/WithdrawForm.css';
 
 // Axios
-import axios from "axios";
+import api from "../util/apiClient";
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -37,9 +37,9 @@ const WithdrawForm = ({ onClose, currentBalance }) => {
     // You can perform further actions here, such as updating the balance in a database or state
     // For this example, we'll just log the expected balance
     // console.log(`Expected Balance after withdraw: ${expectedBalance}`);
-    axios({
+    api({
         method: "PATCH",
-        url:"https://sb-backend-6409fb97857a.herokuapp.com/api/account",
+        url:"/api/account",
         headers: {
             Authorization: 'Bearer ' + authToken,
           },

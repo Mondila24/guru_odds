@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { Typography, Container } from '@mui/material';
 
 // Axios
-import axios from 'axios';
+import api from '../util/apiClient';
 
 // CSS
 import '../css/MyBets.css';
@@ -30,9 +30,9 @@ function Bets() {
         document.title = "Algo | My Bets"
         setLoading(true)
 
-        axios({
+        api({
             method: "GET",
-            url:"https://sb-backend-6409fb97857a.herokuapp.com/api/bets",
+            url:"/api/bets",
             headers: {
               Authorization: 'Bearer ' + authToken
             }

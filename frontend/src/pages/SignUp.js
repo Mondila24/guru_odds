@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // API
-import axios from "axios";
+import api from "../util/apiClient";
 
 // Hooks
 import useGoogleMapsApi from '../hooks/useGoogleMapsApi';
@@ -70,9 +70,9 @@ function SignUp() {
     const signMeUp = (event) => {
         event.preventDefault()
 
-      axios({
+      api({
         method: "POST",
-        url:"https://sb-backend-6409fb97857a.herokuapp.com/api/signup",
+        url:"/api/signup",
         data:{
             username: formData.username,
             first_name: formData.first_name,

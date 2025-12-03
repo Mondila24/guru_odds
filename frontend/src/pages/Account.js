@@ -1,6 +1,6 @@
 // React
 import { useState, useEffect } from 'react'
-import axios from "axios";
+import api from "../util/apiClient";
 
 // Router
 import { useNavigate } from 'react-router-dom';
@@ -92,9 +92,9 @@ function Account() {
       return;
     }
 
-  axios({
+  api({
     method: "GET",
-    url: "https://sb-backend-6409fb97857a.herokuapp.com/api/account",
+    url: "/api/account",
     headers: {
       Authorization: 'Bearer ' + authToken,
     },

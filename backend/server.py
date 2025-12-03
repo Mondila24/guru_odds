@@ -8,6 +8,7 @@ from routes.showNFL import nfl_blueprint
 from routes.showNBA import nba_blueprint
 from routes.signUp import signup_blueprint
 from routes.userBets import user_bets_blueprint
+from routes.payments import payments_blueprint
 from db import connect
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager
 from bson.objectid import ObjectId
@@ -25,8 +26,24 @@ load_dotenv()
 # Initializing flask app
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 
-scheduler = BackgroundScheduler()
-scheduler.start()
+# Scheduler configuration
+ENABLE_SCHEDULER = os.getenv('ENABLE_SCHEDULER', 'true').lower() == 'true'
+BASE_URL = os.getenv('BASE_URL', 'http://localhost:5000')
+
+# CORS configuration
+ALLOWED_ORIGINS = [o.strip() for o in os.getenv('ALLOWED_ORIGINS', 'http://localhost:3001').split(',') if o.strip()]
+SUPPORTS_CREDENTIALS = os.getenv('SUPPORTS_CREDENTIALS', 'false').lower() == 'true'
+CORS(
+    app,
+    resources={r"/api/*": {"origins": ALLOWED_ORIGINS}},
+    supports_credentials=SUPPORTS_CREDENTIALS,
+    methods=["GET", "POST", "PATCH", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
+)
+
+if ENABLE_SCHEDULER:
+    scheduler = BackgroundScheduler()
+    scheduler.start()
 
 ### Login Session/Authentication management
 secret_key = os.getenv('SECRET_KEY')
@@ -168,7 +185,7 @@ def home():
     
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return jsonify({"status": "ok"})
     
 
 
@@ -184,26 +201,28 @@ app.register_blueprint(signup_blueprint, url_prefix='/api/signup')
 
 # Blueprint to see user bets and insert new ones
 app.register_blueprint(user_bets_blueprint, url_prefix='/api/bets')
+app.register_blueprint(payments_blueprint, url_prefix='/api/payments')
 
 
 
 def scheduled_task_job():
-    response = requests.get('http://0.0.0.0:5000/api/nfl/update_games')  # Replace with your Flask app's URL
+    response = requests.get(f'{BASE_URL}/api/nfl/update_games')
     if response.status_code == 200:
         print("Scheduled task executed and called /api/nfl/update_games.")
     else:
         print(f"Scheduled task executed, but calling /api/nfl/update_games failed with status code {response.status_code}.")
 
-    response = requests.get('http://0.0.0.0:5000/api/nba/update_games')  # Replace with your Flask app's URL
+    response = requests.get(f'{BASE_URL}/api/nba/update_games')
     if response.status_code == 200:
         print("Scheduled task executed and called /api/nba/update_games.")
     else:
         print(f"Scheduled task executed, but calling /api/nba/update_games failed with status code {response.status_code}.")
 
 
-# Schedule the task to run daily at 3 AM
-scheduler.add_job(scheduled_task_job, 'cron', hour=3, minute=30)
-scheduler.add_job(scheduled_task_job, 'cron', hour=11, minute=30)
+if ENABLE_SCHEDULER:
+    # Schedule the task to run at 3:30 AM and 11:30 AM EST
+    scheduler.add_job(scheduled_task_job, 'cron', hour=3, minute=30)
+    scheduler.add_job(scheduled_task_job, 'cron', hour=11, minute=30)
      
 # Running app
 if __name__ == '__main__':

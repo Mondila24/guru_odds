@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // API
-import axios from "axios";
+import api from "../util/apiClient";
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -35,9 +35,9 @@ function Login() {
     const logMeIn = (event) => {
         event.preventDefault()
 
-      axios({
+      api({
         method: "POST",
-        url:"https://sb-backend-6409fb97857a.herokuapp.com/api/token",
+        url:"/api/token",
         data:{
           username: formData.username,
           password: formData.password

@@ -7,6 +7,16 @@ from routes.responses import bad_db_connection
 
 load_dotenv()
 mongo_uri = os.getenv('MONGO_URI')
+mongo_db_name = os.getenv('MONGO_DB_NAME', 'PredictionDB')
+_client = None
+_db = None
+
+def _get_db():
+    global _client, _db
+    if _db is None:
+        _client = MongoClient(mongo_uri)
+        _db = _client[mongo_db_name]
+    return _db
 
 def connect(collection):
     
@@ -20,33 +30,24 @@ def connect(collection):
 
 def connectUsers():
     try:
-        # Connect to MongoDB
-        client = MongoClient(mongo_uri)
-        db = client.users #Whatever after . is collection name
-        return client.db.users
+        db = _get_db()
+        return db['users']
 
     except Exception as e:
-        # Todo: implement better exception handling
         return bad_db_connection(e)
 
 def connectGames():
     try:
-        # Connect to MongoDB
-        client = MongoClient(mongo_uri)
-        db = client.games #Whatever after . is collection name
-        return client.db.games
+        db = _get_db()
+        return db['games']
 
     except Exception as e:
-        # Todo: implement better exception handling
         return bad_db_connection(e)
 
 def connectBets():
     try:
-        # Connect to MongoDB
-        client = MongoClient(mongo_uri)
-        db = client.bets #Whatever after . is collection name
-        return client.db.bets
+        db = _get_db()
+        return db['bets']
 
     except Exception as e:
-        # Todo: implement better exception handling
         return bad_db_connection(e)
