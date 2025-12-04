@@ -112,3 +112,18 @@
     background-color: #2b90ff !important;
     color: #ffffff !important;
 }
+
+@media (max-width: 768px) {
+  .betslip-container {
+    align-items: stretch;
+    padding: 8px 8px 0 8px;
+    border-left: none;
+    margin-top: 64px;
+  }
+  .betslip-title-header {
+    justify-content: center;
+  }
+  .list-item {
+    justify-content: flex-start;
+  }
+}

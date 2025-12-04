@@ -3,7 +3,8 @@
     flex-wrap: wrap;
     background-color: #1d1e1f;
     margin: 0 auto;
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
     height: auto;
     padding-top: 40px;
 }
@@ -13,7 +14,8 @@
     justify-content: flex-start;
     color: #ffffff;
     margin-left: 30px;
-    width: 478px;
+    width: auto;
+    flex: 1;
 }
 
 .betting-terms {
@@ -32,7 +34,21 @@
     flex-wrap: nowrap;
     justify-content: center;
     color: inherit;
-    width: 124px;
+    width: auto;
+    min-width: 96px;
+}
+
+@media (min-width: 769px) {
+  .sport-name {
+    flex: 0 0 45%;
+  }
+  .betting-terms {
+    flex: 0 0 55%;
+  }
+  .betting-terms > h4 {
+    flex: 1;
+    text-align: center;
+  }
 }
 
 /* .spread-header {

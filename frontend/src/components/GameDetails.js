@@ -148,7 +148,7 @@ const StyledGridContainer = styled(Grid)({
   flexWrap: 'wrap',
 });
 
-const StyledBetBox = styled(BetBox)({
+const StyledBetBox = styled(BetBox)(({ theme }) => ({
   color: '#ffffff',
   border: '2px solid #E0E0E0',
   borderRadius: '5px',
@@ -158,9 +158,13 @@ const StyledBetBox = styled(BetBox)({
   justifyContent: 'center',
   alignItems: 'center',
   padding: '0px',
-});
+  [theme.breakpoints.down('sm')]: {
+    width: '88px',
+    height: '44px',
+  }
+}));
 
-const LogoContainer = styled(Grid)({
+const LogoContainer = styled(Grid)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '8px',
@@ -168,16 +172,23 @@ const LogoContainer = styled(Grid)({
   alignItems: 'center',
   width: '64px',
   paddingLeft: '0px',
-});
+  [theme.breakpoints.down('sm')]: {
+    width: '48px',
+    gap: '6px'
+  }
+}));
 
-const NameContainer = styled(Grid)({
+const NameContainer = styled(Grid)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '8px',
   justifyContent: 'center',
   alignItems: 'flex-start',
-  flexGrow: 1
-});
+  flexGrow: 1,
+  [theme.breakpoints.down('sm')]: {
+    gap: '6px'
+  }
+}));
 
 const BetOptionsContainer = styled(Grid)({
   display: 'flex',
@@ -187,13 +198,16 @@ const BetOptionsContainer = styled(Grid)({
   justifyContent: 'center',
 });
 
-const TeamBetContainer = styled(Grid)({
+const TeamBetContainer = styled(Grid)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'flex-start',
   alignItems: 'center',
-  gap: '8px'
-});
+  gap: '8px',
+  [theme.breakpoints.down('sm')]: {
+    gap: '6px'
+  }
+}));
 
 const BottomContainer = styled(Grid)({
   display: 'flex',
@@ -220,20 +234,26 @@ const DateContainer = styled(Grid)({
   flexWrap: 'wrap'
 });
 
-const BestBetContainer = styled(Grid)({
+const BestBetContainer = styled(Grid)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   flexGrow: 1,
-  gap: '0px',
-  justifyContent: 'space-between',
+  gap: '8px',
+  justifyContent: 'flex-start',
   alignItems: 'center',
   color: '#ffffff',
-  marginLeft: '31.5%',
   fontWeight: '150',
-  marginRight: '2%',
   marginBottom: '2%',
-  width: '175px'
-});
+  width: '175px',
+  [theme.breakpoints.up('md')]: {
+    justifyContent: 'space-between'
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: 'auto',
+    marginLeft: '0',
+    marginRight: '0'
+  }
+}));
 
 const BestBetButton = styled(Button)(({ isClicked }) => ({
   fontSize: '1em',
@@ -281,12 +301,11 @@ const WordsContainer = styled(Grid)({
 
 const LogoDateContainer = styled(Grid)({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-end',
   flexWrap: 'nowrap',
   flexDirection: 'row',
   width: '25%',
   justifyContent: 'flex-start',
-  alignItems: 'flex-end',
   paddingBottom: '1%',
   paddingLeft: '1%'
 })
@@ -313,7 +332,7 @@ const GameDetails = ({ game }) => {
 
     const dispatch = useDispatch();
     const bets = useSelector((state) => state.activeBets.bets);
-    const hasActiveBets = useSelector((state) => state.activeBets.hasActiveBets)
+    
 
     const handleBestBetClick = ({bet_type, game}) => {
       // console.log("best bet type: ", bet_type, " and game: ", game);
@@ -410,11 +429,13 @@ const GameDetails = ({ game }) => {
             <img
               src={'https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/1200px-National_Football_League_logo.svg.png'}
               className="list-item-image"
+              alt="NFL"
             />
           ) : (
             <img
               src={'https://upload.wikimedia.org/wikipedia/en/thumb/0/03/National_Basketball_Association_logo.svg/105px-National_Basketball_Association_logo.svg.png'}
               className="list-item-image"
+              alt="NBA"
             />
           )}
               <DateContainer>{new_date}</DateContainer>

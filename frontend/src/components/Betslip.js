@@ -25,35 +25,50 @@ import { clearActiveBets, submitBets } from '../slices/activeBetSlice';
 import "../css/Betslip.css"
 
 
-const BetslipContainer = styled(Grid)({
+const BetslipContainer = styled(Grid)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     maxWidth: '400px',
-    marginRight: 'auto'
-});
+    marginRight: 'auto',
+    [theme.breakpoints.down('sm')]: {
+        maxWidth: '100%',
+        marginRight: 0,
+        padding: '0 12px'
+    }
+}));
 
-const BetslipHeaderContainer = styled(Grid)({
+const BetslipHeaderContainer = styled(Grid)(({ theme }) => ({
     backgroundColor: '#131314',
     borderBottom: '1px solid #2d2f30',
     width: "100%",
     justifyContent: 'flex-start',
     padding: '30px',
     position: 'relative',
-    marginBottom: '10px'
-})
+    marginBottom: '10px',
+    [theme.breakpoints.down('sm')]: {
+        padding: '16px'
+    }
+}))
 
-const BetslipTitleCounter = styled(Grid)({
+const BetslipTitleCounter = styled(Grid)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-});
+    [theme.breakpoints.down('sm')]: {
+        justifyContent: 'center',
+        gap: '8px'
+    }
+}));
 
-const BetslipsContainer = styled(Box)({
+const BetslipsContainer = styled(Box)(({ theme }) => ({
     maxHeight: '650px',
     overflow: 'auto',
     marginBottom: 'auto',
-});
+    [theme.breakpoints.down('sm')]: {
+        maxHeight: 'unset'
+    }
+}));
 
 const RemoveBetsContainer = styled(Grid)({
     display: 'flex',
