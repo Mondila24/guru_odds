@@ -107,8 +107,9 @@
 /* Grid Styles */
 .grid-container {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 8px;
 }
 
 .parentDiv {
@@ -119,5 +120,18 @@
 
 .game-details-container {
     display: flex;
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .game-details-container {
+    width: 100%;
+  }
+  .form-container,
+  .form-container-clicked {
+    width: 104px;
+    height: 72px;
+  }
 }

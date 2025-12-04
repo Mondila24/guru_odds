@@ -1,31 +1,33 @@
 .welcome-container {
     display: flex;
-    position: fixed;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-end;
-    width: 300px;
-    right: 250px;
+    justify-content: flex-start;
+    width: auto;
 }
 
 .welcome {
     display: flex;
-    position: fixed;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
+    gap: 8px;
     color: #ffffff;
     margin-left: 1%;
-    top: 0;
 }
 
 .welcome-text {
     display: flex;
-    position: fixed;
-    top: 0;
     margin-left: 1%;
     color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .welcome-container {
+    width: auto;
+    justify-content: center;
+  }
 }
 
 .balance {

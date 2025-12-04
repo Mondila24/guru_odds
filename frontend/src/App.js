@@ -56,8 +56,6 @@ function App() {
     return (
 
           <ThemeProvider theme={theme}>
-            <h2 className='hide-on-website'> Please View on Computer! </h2>
-                    <div className='hide-on-mobile'>  
                         <div className="page-content">
                         <Navbar />
 
@@ -91,7 +89,6 @@ function App() {
                             </div>
 
                         </div>
-                    </div>
           </ThemeProvider>
     );
   }

@@ -1,30 +1,52 @@
 /* Style for the container that holds the sidebar and content */
 .page-content {
-    display: flex; /* Use flexbox to create a sidebar layout */
-    flex-direction: row; /* Make the sidebar and content side-by-side */
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     margin: 0;
 }
 
 @media (max-width: 768px) {
-    /* Define your mobile-specific styles here */
-    /* For example, you can hide specific elements */
+    .page-content {
+      flex-direction: column;
+    }
+    .under-navbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .side-bar-wrapper,
+    .bet-slip-wrapper {
+      min-width: 0;
+      position: static;
+      height: auto;
+      width: 100%;
+    }
+    .side-bar {
+      position: static;
+      height: auto;
+      width: 100%;
+    }
+    .bet-slip {
+      position: static;
+      width: 100%;
+      height: auto;
+    }
+    .middle {
+      width: 100%;
+    }
     .hide-on-mobile {
+      display: block;
+    }
+    .hide-on-website {
       display: none;
     }
-  }
+}
 
 @media (min-width: 0px) {
-    /* Define your mobile-specific styles here */
-    /* For example, you can hide specific elements */
     .hide-on-website {
-      color: white;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      margin-top: 50%;
+      display: none;
     }
-  }
+}
 
 @media (min-width: 769px) {
     .hide-on-website {
@@ -33,8 +55,8 @@
   }
 
 .under-navbar {
-    display: flex; /* Use flexbox to create a sidebar layout */
-    flex-direction: row; /* Make the sidebar and content side-by-side */
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     margin: 0;
 }
@@ -71,4 +93,6 @@
 .middle {
     display: flex;
     position: relative;
+    flex: 1;
+    min-width: 0;
 }

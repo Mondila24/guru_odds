@@ -151,10 +151,10 @@ const StyledGridContainer = styled(Grid)({
 const StyledBetBox = styled(BetBox)({
   color: '#ffffff',
   border: '2px solid #E0E0E0',
-  borderRadius: '5px',  // Adjusted to match your image
-  width: '50px',
-  height: '80px',
-  flexDirection: 'column',  // Stack content vertically
+  borderRadius: '5px',
+  width: '100px',
+  height: '50px',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   padding: '0px',
@@ -163,19 +163,20 @@ const StyledBetBox = styled(BetBox)({
 const LogoContainer = styled(Grid)({
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',  // Space between logos
+  gap: '8px',
   justifyContent: 'center',
   alignItems: 'center',
-  paddingLeft: '50px',
+  width: '64px',
+  paddingLeft: '0px',
 });
 
 const NameContainer = styled(Grid)({
-  minWidth: '300px',
   display: 'flex',
   flexDirection: 'column',
-  gap: '70px',  // Space between names
+  gap: '8px',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'flex-start',
+  flexGrow: 1
 });
 
 const BetOptionsContainer = styled(Grid)({
@@ -189,8 +190,9 @@ const BetOptionsContainer = styled(Grid)({
 const TeamBetContainer = styled(Grid)({
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center'
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  gap: '8px'
 });
 
 const BottomContainer = styled(Grid)({
