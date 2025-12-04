@@ -1,0 +1,17 @@
+{
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "build": {
+    "env": {
+      "REACT_APP_API_BASE_URL": "https://guru-odds.onrender.com"
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
