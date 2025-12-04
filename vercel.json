@@ -8,7 +8,8 @@
   ],
   "build": {
     "env": {
-      "REACT_APP_API_BASE_URL": "https://guru-odds.onrender.com"
+      "REACT_APP_API_BASE_URL": "https://guru-odds.onrender.com",
+      "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
     }
   },
   "rewrites": [
